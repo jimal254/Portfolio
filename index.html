@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jimmy Maina — Data Analyst &amp; BI Consultant</title>
+  <meta name="description" content="Jimmy Maina — Data Analyst &amp; BI Consultant. Architecting governed Power BI ecosystems, automated SQL pipelines, and executive analytics for global enterprises.">
+  <meta name="theme-color" content="#000000">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#000000',
+            obsidianSurface: '#070709',
+            obsidianCard: '#0E0E11',
+            hairline: 'rgba(255, 255, 255, 0.12)',
+            cyanTelemetry: '#00E5FF',
+            emeraldTelemetry: '#10B981',
+            cobaltTelemetry: '#3B82F6',
+            violetTelemetry: '#8B5CF6',
+          },
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          transitionTimingFunction: {
+            'editorial': 'cubic-bezier(0.16, 1, 0.3, 1)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      overflow-x: hidden;
+      letter-spacing: -0.015em;
+      background-color: #000000;
+    }
+
+    /* Minimalist Scrollbar */
+    ::-webkit-scrollbar {
+      width: 3px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #000000;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Cinematic Slow Ambient Motion */
+    @keyframes slowPan {
+      0% { transform: scale(1.02) translate3d(0%, 0%, 0); }
+      50% { transform: scale(1.08) translate3d(-1%, -0.8%, 0); }
+      100% { transform: scale(1.02) translate3d(0%, 0%, 0); }
+    }
+
+    .cinematic-bg-video {
+      animation: slowPan 40s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    /* Reveal Motion */
+    .reveal-block {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s var(--ease-editorial), transform 0.8s var(--ease-editorial);
+    }
+    .reveal-block.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Navigation Link Underline */
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 1px;
+      background-color: #FFFFFF;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s var(--ease-editorial);
+    }
+    .nav-link:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Expandable Case Drawer */
+    .case-drawer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.5s var(--ease-editorial);
+    }
+    .case-item.is-open .case-drawer {
+      grid-template-rows: 1fr;
+    }
+    .case-inner {
+      overflow: hidden;
+    }
+    .case-plus {
+      transition: transform 0.4s var(--ease-editorial);
+    }
+    .case-item.is-open .case-plus {
+      transform: rotate(45deg);
+    }
+
+    /* Sliders */
+    input[type="range"].obsidian-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.2);
+      outline: none;
+      cursor: pointer;
+    }
+    input[type="range"].obsidian-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 9999px;
+      background: #FFFFFF;
+      border: 2px solid #000000;
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+      transition: transform 0.25s ease, background-color 0.25s ease;
+    }
+    input[type="range"].obsidian-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      background: #00E5FF;
+    }
+
+    .svg-spline {
+      transition: d 0.6s var(--ease-editorial), stroke 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-obsidian text-white selection:bg-white selection:text-black">
+
+  <!-- ===================================================================== -->
+  <!-- FULL-BLEED CINEMATIC EMBEDDED VIDEO BACKGROUND (REAL PEOPLE WORKING)   -->
+  <!-- ===================================================================== -->
+  <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-obsidian">
+    <video autoplay muted loop playsinline class="cinematic-bg-video absolute inset-0 w-full h-full object-cover object-center opacity-45">
+      <!-- High-end architectural studio video loop showing real people walking, typing, and collaborating -->
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-group-of-people-working-in-an-office-4164-large.mp4" type="video/mp4">
+    </video>
+    <!-- Deep pitch-black obsidian glass aesthetic overlays -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/60 backdrop-blur-[2px]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,229,255,0.07),transparent_60%)]"></div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- NAVIGATION BAR                                                        -->
+  <!-- ===================================================================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/85 backdrop-blur-2xl border-b border-hairline">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3.5 group">
+        <div class="w-8 h-8 rounded-md bg-white text-black font-mono text-xs font-bold flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+          JM
+        </div>
+        <div class="flex flex-col">
+          <span class="text-sm font-medium tracking-tight text-white">Jimmy Maina</span>
+          <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-400 hidden sm:inline">Data Analyst &amp; BI Consultant</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-10 font-mono text-xs text-zinc-400">
+        <a href="#studio" class="nav-link hover:text-white transition-colors">Power BI Studio</a>
+        <a href="#roi-model" class="nav-link hover:text-white transition-colors">ROI Model</a>
+        <a href="#work" class="nav-link hover:text-white transition-colors">Work</a>
+        <a href="#contact" class="nav-link hover:text-white transition-colors">Contact</a>
+      </nav>
+
+      <div>
+        <a href="#contact" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-mono text-xs font-semibold hover:bg-cyanTelemetry transition-colors duration-300 shadow-lg">
+          <span>Initiate Brief</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- HERO SECTION                                                          -->
+  <!-- ===================================================================== -->
+  <section class="relative z-10 min-h-screen flex flex-col justify-between pt-36 pb-16 sm:pt-44 sm:pb-20 border-b border-hairline">
+    <div class="max-w-7xl w-full mx-auto px-6 sm:px-10 lg:px-16 my-auto">
+      <div class="reveal-block inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.06] backdrop-blur-md border border-hairline font-mono text-[11px] uppercase tracking-widest text-zinc-300 mb-8">
+        <span class="w-2 h-2 rounded-full bg-emeraldTelemetry animate-pulse"></span>
+        <span>Global Enterprise Advisory · Power BI &amp; SQL Architecture</span>
+      </div>
+
+      <h1 class="reveal-block text-4xl sm:text-6xl lg:text-[4.75rem] font-light tracking-tight text-white leading-[1.04] max-w-5xl mb-8" style="transition-delay: 80ms;">
+        Precision Data Architecture. <br>
+        <span class="font-medium text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-400">Executive Decision Clarity.</span>
+      </h1>
+
+      <p class="reveal-block text-base sm:text-xl font-light text-zinc-300 max-w-2xl leading-relaxed mb-12" style="transition-delay: 160ms;">
+        Data Analyst &amp; BI Consultant engineering governed Power BI ecosystems, automated T-SQL data warehouses, and predictive financial intelligence for global organizations.
+      </p>
+
+      <div class="reveal-block flex flex-wrap items-center gap-4" style="transition-delay: 240ms;">
+        <a href="#studio" class="px-7 py-3.5 rounded-full bg-white text-black font-mono text-xs font-semibold uppercase tracking-wider hover:bg-cyanTelemetry transition-all duration-300 shadow-2xl">
+          Launch Live Power BI Studio ↓
+        </a>
+        <a href="https://github.com/JIMAL254" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-full bg-white/[0.05] backdrop-blur-md border border-hairline text-white font-mono text-xs hover:border-white transition-all duration-300">
+          GitHub / JIMAL254 ↗
+        </a>
+        <a href="https://linkedin.com/in/jimmymaina" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-full bg-white/[0.05] backdrop-blur-md border border-hairline text-white font-mono text-xs hover:border-white transition-all duration-300">
+          LinkedIn / jimmymaina ↗
+        </a>
+      </div>
+    </div>
+
+    <div class="max-w-7xl w-full mx-auto px-6 sm:px-10 lg:px-16 pt-12">
+      <div class="reveal-block pt-8 border-t border-hairline grid grid-cols-2 lg:grid-cols-4 gap-8 font-mono" style="transition-delay: 320ms;">
+        <div>
+          <span class="block text-[10px] uppercase tracking-widest text-zinc-500 mb-1">Semantic Layer</span>
+          <span class="text-xs sm:text-sm font-medium text-white">Star-Schema &amp; DAX</span>
+        </div>
+        <div>
+          <span class="block text-[10px] uppercase tracking-widest text-zinc-500 mb-1">Data Engineering</span>
+          <span class="text-xs sm:text-sm font-medium text-white">T-SQL &amp; Azure Data Factory</span>
+        </div>
+        <div>
+          <span class="block text-[10px] uppercase tracking-widest text-zinc-500 mb-1">Predictive Modeling</span>
+          <span class="text-xs sm:text-sm font-medium text-white">Python Econometrics</span>
+        </div>
+        <div>
+          <span class="block text-[10px] uppercase tracking-widest text-zinc-500 mb-1">Production Scale</span>
+          <span class="text-xs sm:text-sm font-medium text-white">200+ Enterprise Users</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- LIVE INTERACTIVE POWER BI STUDIO                                      -->
+  <!-- ===================================================================== -->
+  <section id="studio" class="relative z-10 py-24 sm:py-32 border-b border-hairline bg-black/80 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+      
+      <div class="reveal-block flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-widest text-cyanTelemetry block mb-3">Interactive Telemetry Workspace</span>
+          <h2 class="text-3xl sm:text-5xl font-light tracking-tight text-white">Live Power BI Studio</h2>
+        </div>
+        <p class="text-sm text-zinc-400 max-w-md leading-relaxed">
+          Click between enterprise semantic models and regional slicers below to inspect live DAX calculations, variance trajectories, and reconciled financial metrics.
+        </p>
+      </div>
+
+      <div class="reveal-block flex flex-wrap gap-3 mb-6 font-mono text-xs">
+        <button onclick="setModel('YIELD', this)" class="model-tab active px-5 py-3 rounded-lg bg-white text-black font-semibold transition-all duration-300">
+          Hospitality Revenue Yield
+        </button>
+        <button onclick="setModel('SUPPLY', this)" class="model-tab px-5 py-3 rounded-lg bg-obsidianCard text-zinc-400 border border-hairline hover:border-white hover:text-white transition-all duration-300">
+          Supply Chain &amp; Warehouse
+        </button>
+        <button onclick="setModel('FINANCE', this)" class="model-tab px-5 py-3 rounded-lg bg-obsidianCard text-zinc-400 border border-hairline hover:border-white hover:text-white transition-all duration-300">
+          Executive Financial P&amp;L
+        </button>
+      </div>
+
+      <div class="reveal-block bg-obsidianSurface/95 backdrop-blur-2xl border border-hairline rounded-2xl shadow-[0_25px_70px_rgba(0,0,0,0.85)] overflow-hidden">
+        
+        <div class="px-6 sm:px-8 py-4 bg-obsidianCard border-b border-hairline flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-3 font-mono text-xs">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyanTelemetry animate-pulse"></span>
+            <span id="model-filename" class="font-medium text-white">Hospitality_Revenue_Yield_v4.pbix</span>
+            <span class="hidden sm:inline-block px-2 py-0.5 rounded bg-white/[0.07] text-zinc-300 text-[10px]">DIRECTQUERY · FY 2026</span>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2 font-mono text-[11px]">
+            <button onclick="setRegion('GLOBAL', this)" class="region-btn px-3 py-1.5 rounded-md bg-white text-black font-semibold transition-all">All Regions</button>
+            <button onclick="setRegion('EMEA', this)" class="region-btn px-3 py-1.5 rounded-md bg-white/[0.06] text-zinc-400 hover:text-white transition-all">EMEA</button>
+            <button onclick="setRegion('AMERICAS', this)" class="region-btn px-3 py-1.5 rounded-md bg-white/[0.06] text-zinc-400 hover:text-white transition-all">Americas</button>
+            <button onclick="setRegion('APAC', this)" class="region-btn px-3 py-1.5 rounded-md bg-white/[0.06] text-zinc-400 hover:text-white transition-all">APAC</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-b border-hairline divide-y sm:divide-y-0 sm:divide-x divide-hairline">
+          <div class="p-6 sm:p-7">
+            <span id="kpi1-lbl" class="font-mono text-[10px] uppercase tracking-widest text-zinc-400 block mb-2">Optimized Revenue</span>
+            <div id="kpi1-val" class="text-3xl font-medium tracking-tight text-white mb-1.5">$26.98M</div>
+            <span id="kpi1-sub" class="inline-flex items-center font-mono text-[11px] font-medium text-emeraldTelemetry bg-emeraldTelemetry/15 px-2.5 py-0.5 rounded">+12.4% (+$2.98M vs $24.0M)</span>
+          </div>
+          <div class="p-6 sm:p-7">
+            <span id="kpi2-lbl" class="font-mono text-[10px] uppercase tracking-widest text-zinc-400 block mb-2">Avg Occupancy Rate</span>
+            <div id="kpi2-val" class="text-3xl font-medium tracking-tight text-white mb-1.5">78.4%</div>
+            <span id="kpi2-sub" class="inline-flex items-center font-mono text-[11px] font-medium text-cyanTelemetry bg-cyanTelemetry/15 px-2.5 py-0.5 rounded">+6.2 pts YoY</span>
+          </div>
+          <div class="p-6 sm:p-7">
+            <span id="kpi3-lbl" class="font-mono text-[10px] uppercase tracking-widest text-zinc-400 block mb-2">RevPAR Index</span>
+            <div id="kpi3-val" class="text-3xl font-medium tracking-tight text-white mb-1.5">$184</div>
+            <span id="kpi3-sub" class="inline-flex items-center font-mono text-[11px] font-medium text-cobaltTelemetry bg-cobaltTelemetry/15 px-2.5 py-0.5 rounded">+14.3% vs $161 comp</span>
+          </div>
+          <div class="p-6 sm:p-7">
+            <span id="kpi4-lbl" class="font-mono text-[10px] uppercase tracking-widest text-zinc-400 block mb-2">DAX Query Latency</span>
+            <div id="kpi4-val" class="text-3xl font-medium tracking-tight text-white mb-1.5">0.38s</div>
+            <span id="kpi4-sub" class="inline-flex items-center font-mono text-[11px] font-medium text-violetTelemetry bg-violetTelemetry/15 px-2.5 py-0.5 rounded">-68% vs legacy 1.19s</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 border-b border-hairline">
+          <div class="lg:col-span-8 p-6 sm:p-8 border-b lg:border-b-0 lg:border-r border-hairline relative">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div>
+                <h3 id="chart-title" class="text-sm font-medium text-white">Monthly Optimized Revenue vs. Baseline ($M)</h3>
+                <p class="font-mono text-[11px] text-zinc-400 mt-0.5">Hover any node to inspect exact monthly variance</p>
+              </div>
+              <div class="flex items-center gap-5 font-mono text-[11px]">
+                <span class="flex items-center gap-2 text-white">
+                  <span id="legend-dot" class="w-2.5 h-2.5 rounded-full bg-cyanTelemetry"></span> Optimized Model
+                </span>
+                <span class="flex items-center gap-2 text-zinc-400">
+                  <span class="w-2.5 h-2.5 rounded-full bg-zinc-600"></span> Prior Baseline
+                </span>
+              </div>
+            </div>
+
+            <div class="relative w-full h-[265px]">
+              <div id="chart-tooltip" class="absolute pointer-events-none opacity-0 transition-opacity duration-200 bg-black/95 border border-white/25 rounded-lg p-3.5 font-mono text-xs shadow-2xl z-30 -translate-x-1/2 -translate-y-[115%] min-w-[185px]"></div>
+
+              <svg id="pbi-svg" class="w-full h-full overflow-visible" viewBox="0 0 640 230" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="gradCyan" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.24"/>
+                    <stop offset="100%" stop-color="#00E5FF" stop-opacity="0.0"/>
+                  </linearGradient>
+                </defs>
+
+                <line x1="0" y1="30" x2="640" y2="30" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <line x1="0" y1="85" x2="640" y2="85" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <line x1="0" y1="140" x2="640" y2="140" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+                <line x1="0" y1="195" x2="640" y2="195" stroke="rgba(255,255,255,0.07)" stroke-width="1"/>
+
+                <path id="svg-area" class="svg-spline" fill="url(#gradCyan)" d=""/>
+                <path id="svg-base" class="svg-spline" fill="none" stroke="#52525B" stroke-width="1.75" stroke-dasharray="4 4" d=""/>
+                <path id="svg-main" class="svg-spline" fill="none" stroke="#00E5FF" stroke-width="2.75" stroke-linecap="round" d=""/>
+
+                <g id="svg-labels"></g>
+                <g id="svg-nodes"></g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 p-6 sm:p-8 bg-black/30 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between font-mono text-xs mb-6">
+                <span id="breakdown-title" class="font-medium text-white uppercase tracking-wider">Revenue Attribution</span>
+                <span class="text-zinc-500">SHARE %</span>
+              </div>
+              <div id="breakdown-list" class="space-y-5 mb-8"></div>
+            </div>
+            <div class="p-4 rounded-xl bg-white/[0.04] border border-hairline">
+              <span class="font-mono text-[10px] uppercase tracking-widest text-zinc-400 block mb-1.5">Semantic Engine Note</span>
+              <p id="engine-note" class="text-xs text-zinc-200 leading-relaxed">
+                Star-schema fact tables partitioned by booking horizon enable sub-second DAX elasticity calculations across 4.2M rows.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8 bg-obsidianCard/80">
+          <div class="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-4">Key Analytical Insights</div>
+          <div id="insights-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- ROI MODEL CALCULATOR                                                  -->
+  <!-- ===================================================================== -->
+  <section id="roi-model" class="relative z-10 py-24 sm:py-32 border-b border-hairline bg-black/75 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+      
+      <div class="reveal-block max-w-3xl mb-14">
+        <span class="font-mono text-xs uppercase tracking-widest text-emeraldTelemetry block mb-3">Econometric Impact Simulation</span>
+        <h2 class="text-3xl sm:text-5xl font-light tracking-tight text-white mb-4">Enterprise Value Calculator</h2>
+        <p class="text-sm sm:text-base text-zinc-400 leading-relaxed">
+          Adjust your enterprise baseline parameters to model annual revenue expansion and analyst capacity reclaimed through automated SQL and Power BI architecture.
+        </p>
+      </div>
+
+      <div class="reveal-block grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        
+        <div class="lg:col-span-5 bg-obsidianSurface/90 backdrop-blur-xl border border-hairline rounded-2xl p-8 flex flex-col justify-between">
+          <div class="space-y-9">
+            <div>
+              <div class="flex justify-between items-baseline mb-3">
+                <label for="slider-rev" class="text-xs font-medium text-white">Annual Enterprise Revenue</label>
+                <span id="val-rev" class="font-mono text-sm font-semibold text-cyanTelemetry">$30,000,000</span>
+              </div>
+              <input type="range" id="slider-rev" class="obsidian-slider" min="10000000" max="100000000" step="2000000" value="30000000" oninput="recalculateROI()">
+            </div>
+
+            <div>
+              <div class="flex justify-between items-baseline mb-3">
+                <label for="slider-team" class="text-xs font-medium text-white">Analytics &amp; Ops Team Size</label>
+                <span id="val-team" class="font-mono text-sm font-semibold text-emeraldTelemetry">15 Staff</span>
+              </div>
+              <input type="range" id="slider-team" class="obsidian-slider" min="5" max="50" step="1" value="15" oninput="recalculateROI()">
+            </div>
+
+            <div>
+              <div class="flex justify-between items-baseline mb-3">
+                <label for="slider-lift" class="text-xs font-medium text-white">Target Decision-Led Lift</label>
+                <span id="val-lift" class="font-mono text-sm font-semibold text-cobaltTelemetry">10%</span>
+              </div>
+              <input type="range" id="slider-lift" class="obsidian-slider" min="4" max="18" step="1" value="10" oninput="recalculateROI()">
+            </div>
+          </div>
+
+          <div class="mt-10 pt-5 border-t border-hairline font-mono text-[11px] text-zinc-400 leading-relaxed">
+            RECONCILED MODEL: (Revenue × Lift%) + (Staff × 12 hrs/wk × 48 wks × $65/hr)
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-obsidianSurface/90 backdrop-blur-xl border border-hairline rounded-2xl p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-8">
+              <span class="font-mono text-xs uppercase tracking-widest text-zinc-400">Projected 12-Month Enterprise Impact</span>
+              <span id="roi-total-pill" class="font-mono text-xs font-semibold px-3.5 py-1.5 rounded-full bg-white text-black">
+                Total Annual Value: +$3,561,600
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+              <div class="p-5 rounded-xl bg-white/[0.04] border border-hairline">
+                <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-400 block mb-1.5">Incremental Impact</span>
+                <div id="out-rev-impact" class="text-2xl font-semibold text-cyanTelemetry tracking-tight">+$3,000,000</div>
+              </div>
+              <div class="p-5 rounded-xl bg-white/[0.04] border border-hairline">
+                <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-400 block mb-1.5">Hours Reclaimed</span>
+                <div id="out-hours" class="text-2xl font-semibold text-emeraldTelemetry tracking-tight">8,640 hrs</div>
+              </div>
+              <div class="p-5 rounded-xl bg-white/[0.04] border border-hairline">
+                <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-400 block mb-1.5">OpEx Cost Savings</span>
+                <div id="out-savings" class="text-2xl font-semibold text-cobaltTelemetry tracking-tight">+$561,600</div>
+              </div>
+            </div>
+
+            <div class="mb-8">
+              <div class="flex justify-between font-mono text-[11px] mb-2.5">
+                <span id="bar-lbl-left" class="text-cyanTelemetry">Revenue / Margin Lift (84%)</span>
+                <span id="bar-lbl-right" class="text-emeraldTelemetry">Operational Savings (16%)</span>
+              </div>
+              <div class="w-full h-3 rounded-full bg-white/[0.06] overflow-hidden flex p-0.5 border border-hairline">
+                <div id="bar-fill-left" class="h-full rounded-l-full bg-cyanTelemetry transition-all duration-500 ease-editorial" style="width: 84%;"></div>
+                <div id="bar-fill-right" class="h-full rounded-r-full bg-emeraldTelemetry transition-all duration-500 ease-editorial ml-0.5" style="width: 16%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-xl bg-white/[0.03] border border-hairline text-xs sm:text-sm text-zinc-300 leading-relaxed">
+            <p id="roi-narrative">
+              Automating manual SQL &amp; Power BI workflows reclaims <strong>8,640 hours annually</strong> (<strong>$561,600</strong> in direct operational savings) while decision-led optimization generates <strong>$3,000,000</strong> in incremental value—totaling <strong>$3,561,600</strong> per year.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- EDITORIAL CASE STUDIES                                                -->
+  <!-- ===================================================================== -->
+  <section id="work" class="relative z-10 py-24 sm:py-32 border-b border-hairline bg-black/75 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+      
+      <div class="reveal-block flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-widest text-cyanTelemetry block mb-3">Enterprise Track Record</span>
+          <h2 class="text-3xl sm:text-5xl font-light tracking-tight text-white">Selected Case Index</h2>
+        </div>
+        <p class="text-sm text-zinc-400 max-w-sm">
+          Expand any engagement below to review architectural scope, data scale, and verified business outcomes.
+        </p>
+      </div>
+
+      <div class="reveal-block divide-y divide-hairline border-y border-hairline">
+        
+        <div class="case-item group cursor-pointer" onclick="toggleCase(this)">
+          <div class="py-8 sm:py-10 flex items-center justify-between gap-6">
+            <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-12">
+              <span class="font-mono text-xs text-zinc-500 uppercase tracking-widest">Global Hospitality</span>
+              <h3 class="text-xl sm:text-2xl font-light text-white group-hover:text-cyanTelemetry transition-colors">
+                Predictive Yield &amp; Dynamic Pricing Engine
+              </h3>
+            </div>
+            <div class="flex items-center gap-6 font-mono text-xs text-zinc-400">
+              <span class="hidden md:inline">+12.4% RevPAR Lift</span>
+              <div class="w-8 h-8 rounded-full border border-hairline flex items-center justify-center text-white group-hover:border-white transition-colors">
+                <span class="case-plus text-base font-light">+</span>
+              </div>
+            </div>
+          </div>
+          <div class="case-drawer">
+            <div class="case-inner pb-8 sm:pb-10 grid grid-cols-1 lg:grid-cols-12 gap-8 text-sm text-zinc-300">
+              <div class="lg:col-span-8 space-y-4">
+                <p class="leading-relaxed">
+                  Architected an enterprise star-schema semantic model in Power BI integrated with Azure SQL data pipelines, replacing legacy fragmented Excel reporting across 45 properties.
+                </p>
+              </div>
+              <div class="lg:col-span-4 bg-obsidianCard p-6 rounded-xl border border-hairline font-mono text-xs space-y-3">
+                <div class="text-cyanTelemetry font-semibold">Verified Outcome</div>
+                <div class="text-zinc-200">12.4% top-line revenue expansion within 90 days of executive dashboard rollout.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-item group cursor-pointer" onclick="toggleCase(this)">
+          <div class="py-8 sm:py-10 flex items-center justify-between gap-6">
+            <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-12">
+              <span class="font-mono text-xs text-zinc-500 uppercase tracking-widest">Supply Chain</span>
+              <h3 class="text-xl sm:text-2xl font-light text-white group-hover:text-cyanTelemetry transition-colors">
+                Automated T-SQL Data Warehouse Migration
+              </h3>
+            </div>
+            <div class="flex items-center gap-6 font-mono text-xs text-zinc-400">
+              <span class="hidden md:inline">-40% Query Latency</span>
+              <div class="w-8 h-8 rounded-full border border-hairline flex items-center justify-center text-white group-hover:border-white transition-colors">
+                <span class="case-plus text-base font-light">+</span>
+              </div>
+            </div>
+          </div>
+          <div class="case-drawer">
+            <div class="case-inner pb-8 sm:pb-10 grid grid-cols-1 lg:grid-cols-12 gap-8 text-sm text-zinc-300">
+              <div class="lg:col-span-8 space-y-4">
+                <p class="leading-relaxed">
+                  Refactored legacy stored procedures and established incremental refresh partitions in Power BI Service, cutting report load times from 12 seconds to sub-second responses.
+                </p>
+              </div>
+              <div class="lg:col-span-4 bg-obsidianCard p-6 rounded-xl border border-hairline font-mono text-xs space-y-3">
+                <div class="text-emeraldTelemetry font-semibold">Verified Outcome</div>
+                <div class="text-zinc-200">Zero query timeouts and 100% adoption across 180 active logistics managers.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- CONTACT SECTION & COOKIE BANNER                                       -->
+  <!-- ===================================================================== -->
+  <section id="contact" class="relative z-10 py-24 sm:py-32 bg-black/80 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+      <div class="bg-obsidianSurface/95 backdrop-blur-2xl border border-hairline rounded-3xl p-8 sm:p-14 lg:p-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center shadow-[0_30px_90px_rgba(0,0,0,0.9)]">
+        
+        <div class="lg:col-span-6 space-y-6">
+          <span class="font-mono text-xs uppercase tracking-widest text-cyanTelemetry">Initiate Collaboration</span>
+          <h2 class="text-3xl sm:text-5xl font-light tracking-tight text-white">Secure Your Data Advantage.</h2>
+          <p class="text-sm sm:text-base text-zinc-300 leading-relaxed font-light">
+            Partner with Jimmy Maina to architect enterprise-grade Power BI models, automated SQL data warehouses, and executive intelligence systems.
+          </p>
+
+          <div class="pt-6 space-y-4 font-mono text-xs">
+            <a href="https://github.com/JIMAL254" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-white/[0.04] border border-hairline hover:border-white transition-all">
+              <span class="text-white">GitHub Repositories</span>
+              <span class="text-zinc-400">github.com/JIMAL254 →</span>
+            </a>
+            <a href="https://linkedin.com/in/jimmymaina" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-white/[0.04] border border-hairline hover:border-white transition-all">
+              <span class="text-white">LinkedIn Professional Profile</span>
+              <span class="text-zinc-400">linkedin.com/in/jimmymaina →</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 bg-obsidianCard p-8 rounded-2xl border border-hairline">
+          <form onsubmit="submitBrief(event)" class="space-y-5 font-mono text-xs">
+            <div>
+              <label class="block text-zinc-400 uppercase text-[10px] tracking-wider mb-2">Your Name / Title</label>
+              <input type="text" required class="w-full px-4 py-3 rounded-lg bg-obsidianSurface border border-hairline text-white focus:border-cyanTelemetry outline-none transition-all" placeholder="Victoria Sterling, VP of Analytics">
+            </div>
+            <div>
+              <label class="block text-zinc-400 uppercase text-[10px] tracking-wider mb-2">Corporate Email</label>
+              <input type="email" required class="w-full px-4 py-3 rounded-lg bg-obsidianSurface border border-hairline text-white focus:border-cyanTelemetry outline-none transition-all" placeholder="v.sterling@enterprise.com">
+            </div>
+            <div>
+              <label class="block text-zinc-400 uppercase text-[10px] tracking-wider mb-2">Project Brief &amp; Scope</label>
+              <textarea rows="4" required class="w-full px-4 py-3 rounded-lg bg-obsidianSurface border border-hairline text-white focus:border-cyanTelemetry outline-none transition-all resize-none" placeholder="Describe your Power BI modeling or SQL pipeline objectives..."></textarea>
+            </div>
+            <button type="submit" id="submit-btn" class="w-full py-4 rounded-xl bg-white text-black font-semibold uppercase tracking-wider hover:bg-cyanTelemetry transition-all duration-300 shadow-lg">
+              Dispatch Consultation Request
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COOKIE CONSENT BANNER -->
+  <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-50 bg-obsidianSurface border-t border-hairline p-5 sm:px-12 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs transition-transform duration-500 shadow-2xl">
+    <div class="max-w-3xl text-zinc-300">
+      <p class="leading-relaxed">
+        We use essential cookies and Google Analytics to improve your experience. <a href="#" class="text-white underline hover:text-zinc-200">Learn more.</a>
+      </p>
+    </div>
+    <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+      <button onclick="handleCookieAction('reject')" class="px-4 py-2 rounded-md bg-obsidian border border-hairline text-zinc-400 hover:text-white uppercase transition-all">Reject all</button>
+      <button onclick="handleCookieAction('settings')" class="px-4 py-2 rounded-md bg-obsidian border border-hairline text-zinc-400 hover:text-white uppercase transition-all">Settings</button>
+      <button onclick="handleCookieAction('accept')" class="px-5 py-2 rounded-md bg-white text-black font-bold uppercase hover:bg-cyanTelemetry transition-all">Accept all</button>
+    </div>
+  </div>
+
+  <footer class="py-12 px-6 sm:px-10 lg:px-16 bg-obsidian border-t border-hairline text-center font-mono text-xs text-zinc-500 relative z-10">
+    <p>Data Analytics, Business Intelligence &amp; Executive Dashboards · Jimmy Maina</p>
+  </footer>
+
+  <!-- JAVASCRIPT ENGINE -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('is-visible');
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal-block').forEach(el => observer.observe(el));
+
+      const models = {
+        YIELD: {
+          filename: 'Hospitality_Revenue_Yield_v4.pbix',
+          color: '#00E5FF',
+          kpis: [
+            { lbl: 'Optimized Revenue', val: '$26.98M', sub: '+12.4% (+$2.98M vs $24.0M)' },
+            { lbl: 'Avg Occupancy Rate', val: '78.4%', sub: '+6.2 pts YoY' },
+            { lbl: 'RevPAR Index', val: '$184', sub: '+14.3% vs $161 comp' },
+            { lbl: 'DAX Query Latency', val: '0.38s', sub: '-68% vs legacy 1.19s' }
+          ],
+          title: 'Monthly Optimized Revenue vs. Baseline ($M)',
+          main: [1.8, 1.95, 2.1, 2.25, 2.4, 2.6, 2.85, 3.1, 3.3, 3.5, 3.75, 4.0],
+          base: [1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7],
+          breakdownTitle: 'Revenue Attribution',
+          breakdown: [
+            { label: 'Corporate Tier', share: '46%', color: 'bg-cyanTelemetry' },
+            { label: 'Leisure & OTA', share: '34%', color: 'bg-emeraldTelemetry' },
+            { label: 'Group & Events', share: '20%', color: 'bg-violetTelemetry' }
+          ],
+          engineNote: 'Star-schema fact tables partitioned by booking horizon enable sub-second DAX elasticity calculations across 4.2M rows.',
+          insights: [
+            { num: '01', title: 'Dynamic Horizon Pricing', text: 'Shifting advance-purchase windows captured 14.3% higher RevPAR during peak conference periods.' },
+            { num: '02', title: 'Channel Mix Shift', text: 'Direct corporate booking attribution rose by 22% following automated segmentation alerts.' },
+            { num: '03', title: 'Sub-Second Partitioning', text: 'DirectQuery aggregation tables eliminated report timeout bottlenecks during high-concurrency audits.' }
+          ]
+        },
+        SUPPLY: {
+          filename: 'Global_Supply_Chain_Warehouse_v2.pbix',
+          color: '#10B981',
+          kpis: [
+            { lbl: 'Throughput Volume', val: '142.6K Units', sub: '+18.5% YoY capacity' },
+            { lbl: 'Stockout Rate', val: '0.42%', sub: '-3.8 pts reduction' },
+            { lbl: 'Fulfillment Cycle', val: '1.4 Days', sub: '-35% processing time' },
+            { lbl: 'Warehouse Latency', val: '0.24s', sub: 'Optimized T-SQL storage' }
+          ],
+          title: 'Warehouse Fulfillment Volume vs. Target (Units K)',
+          main: [10.5, 11.2, 11.8, 12.5, 13.1, 13.8, 14.4, 15.0, 15.7, 16.2, 16.9, 17.5],
+          base: [9.0, 9.4, 9.8, 10.2, 10.6, 11.0, 11.4, 11.8, 12.2, 12.6, 13.0, 13.4],
+          breakdownTitle: 'Fulfillment Velocity',
+          breakdown: [
+            { label: 'Automated Pick', share: '58%', color: 'bg-emeraldTelemetry' },
+            { label: 'Bulk Freight', share: '28%', color: 'bg-cobaltTelemetry' },
+            { label: 'Express Air', share: '14%', color: 'bg-cyanTelemetry' }
+          ],
+          engineNote: 'Automated incremental refresh partitions in Power BI Service process 45,000 daily logistics events without latency spikes.',
+          insights: [
+            { num: '01', title: 'Bottleneck Elimination', text: 'Real-time staging floor dashboards cut fork-lift transit idle time by 19% across 4 regional hubs.' },
+            { num: '02', title: 'Inventory Accuracy', text: 'Automated cycle-counting alerts maintained 99.8% perpetual inventory ledger fidelity.' },
+            { num: '03', title: 'Zero Timeout Pipelines', text: 'Optimized T-SQL views reduced ETL pipeline execution window from 45 minutes to 12 minutes.' }
+          ]
+        },
+        FINANCE: {
+          filename: 'Executive_Financial_PL_Suite_v3.pbix',
+          color: '#8B5CF6',
+          kpis: [
+            { lbl: 'EBITDA Margin', val: '31.4%', sub: '+4.8 pts expansion' },
+            { lbl: 'Month-End Close', val: '4.2 Days', sub: '-25% faster cycle' },
+            { lbl: 'Free Cash Flow', val: '$18.9M', sub: '+21% YoY growth' },
+            { lbl: 'Reconciliation', val: '100%', sub: 'Zero manual audit flags' }
+          ],
+          title: 'Monthly EBITDA Margin Trajectory vs. Target (%)',
+          main: [24, 25.5, 26.2, 27.0, 28.1, 28.9, 29.5, 30.0, 30.6, 31.0, 31.2, 31.4],
+          base: [22, 22.5, 23.0, 23.5, 24.0, 24.5, 25.0, 25.5, 26.0, 26.5, 27.0, 27.5],
+          breakdownTitle: 'Margin Contribution',
+          breakdown: [
+            { label: 'Core SaaS / Lic', share: '62%', color: 'bg-violetTelemetry' },
+            { label: 'Professional Svc', share: '26%', color: 'bg-cobaltTelemetry' },
+            { label: 'Enterprise Support', share: '12%', color: 'bg-emeraldTelemetry' }
+          ],
+          engineNote: 'Multi-currency translation matrices and automated variance commentary generators unify 6 regional subsidiaries.',
+          insights: [
+            { num: '01', title: 'Automated Close Workflows', text: 'Eliminated manual copy-pasting across 14 spreadsheets, accelerating executive reporting by 4.5 days.' },
+            { num: '02', title: 'Real-Time Variance Alerts', text: 'DAX threshold triggers notify CFO immediately when department opex deviates >3% from forecast.' },
+            { num: '03', title: 'Complete Audit Traceability', text: 'Granular row-level security ensures regional directors inspect only localized P&amp;L line items.' }
+          ]
+        }
+      };
+
+      let activeModelKey = 'YIELD';
+      let activeRegion = 'GLOBAL';
+
+      window.setModel = function(key, btn) {
+        document.querySelectorAll('.model-tab').forEach(b => {
+          b.className = "model-tab px-5 py-3 rounded-lg bg-obsidianCard text-zinc-400 border border-hairline hover:border-white hover:text-white transition-all duration-300";
+        });
+        btn.className = "model-tab active px-5 py-3 rounded-lg bg-white text-black font-semibold transition-all duration-300";
+        activeModelKey = key;
+        renderStudio();
+      };
+
+      window.setRegion = function(region, btn) {
+        document.querySelectorAll('.region-btn').forEach(b => {
+          b.className = "region-btn px-3 py-1.5 rounded-md bg-white/[0.06] text-zinc-400 hover:text-white transition-all";
+        });
+        btn.className = "region-btn px-3 py-1.5 rounded-md bg-white text-black font-semibold transition-all";
+        activeRegion = region;
+        renderStudio();
+      };
+
+      function renderStudio() {
+        const m = models[activeModelKey];
+        document.getElementById('model-filename').textContent = m.filename;
+        document.getElementById('chart-title').textContent = m.title;
+        document.getElementById('breakdown-title').textContent = m.breakdownTitle;
+        document.getElementById('engine-note').textContent = m.engineNote;
+
+        const mult = activeRegion === 'EMEA' ? 1.12 : activeRegion === 'AMERICAS' ? 1.25 : activeRegion === 'APAC' ? 0.95 : 1.0;
+
+        m.kpis.forEach((k, i) => {
+          document.getElementById(`kpi${i+1}-lbl`).textContent = k.lbl;
+          document.getElementById(`kpi${i+1}-sub`).textContent = k.sub;
+          let displayVal = k.val;
+          if(i === 0 && activeModelKey === 'YIELD') {
+            displayVal = `$${(26.98 * mult).toFixed(2)}M`;
+          } else if(i === 0 && activeModelKey === 'SUPPLY') {
+            displayVal = `${(142.6 * mult).toFixed(1)}K Units`;
+          }
+          document.getElementById(`kpi${i+1}-val`).textContent = displayVal;
+        });
+
+        document.getElementById('breakdown-list').innerHTML = m.breakdown.map(b => `
+          <div>
+            <div class="flex justify-between text-xs mb-1.5">
+              <span class="text-white">${b.label}</span>
+              <span class="text-zinc-400 font-mono">${b.share}</span>
+            </div>
+            <div class="w-full h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+              <div class="h-full rounded-full ${b.color}" style="width: ${b.share};"></div>
+            </div>
+          </div>
+        `).join('');
+
+        document.getElementById('insights-grid').innerHTML = m.insights.map(ing => `
+          <div>
+            <div class="font-mono text-xs text-cyanTelemetry mb-1">${ing.num} // ${ing.title}</div>
+            <p class="text-xs text-zinc-300 leading-relaxed">${ing.text}</p>
+          </div>
+        `).join('');
+
+        renderSVGChart(m.main.map(v => Number((v * mult).toFixed(2))), m.base, m.color);
+      }
+
+      function renderSVGChart(main, base, accentColor) {
+        document.getElementById('legend-dot').style.backgroundColor = accentColor;
+        document.getElementById('svg-main').setAttribute('stroke', accentColor);
+
+        const W = 640, H = 230;
+        const allVals = [...main, ...base];
+        const max = Math.max(...allVals) * 1.1;
+        const min = Math.min(...allVals) * 0.85;
+        const step = W / (main.length - 1);
+
+        const ptsMain = main.map((v, i) => ({
+          x: i * step,
+          y: H - 25 - ((v - min) / (max - min || 1)) * 170,
+          val: v,
+          month: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][i]
+        }));
+
+        const ptsBase = base.map((v, i) => ({
+          x: i * step,
+          y: H - 25 - ((v - min) / (max - min || 1)) * 170,
+          val: v
+        }));
+
+        const lineMain = ptsMain.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+        const lineBase = ptsBase.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+        const areaPath = `${lineMain} L ${W} ${H} L 0 ${H} Z`;
+
+        document.getElementById('svg-main').setAttribute('d', lineMain);
+        document.getElementById('svg-base').setAttribute('d', lineBase);
+        document.getElementById('svg-area').setAttribute('d', areaPath);
+
+        const nodesGroup = document.getElementById('svg-nodes');
+        const labelsGroup = document.getElementById('svg-labels');
+        const tooltip = document.getElementById('chart-tooltip');
+        nodesGroup.innerHTML = '';
+        labelsGroup.innerHTML = '';
+
+        ptsMain.forEach((p, i) => {
+          if(i % 2 === 0) {
+            const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            txt.setAttribute('x', p.x);
+            txt.setAttribute('y', H - 5);
+            txt.setAttribute('fill', '#71717A');
+            txt.setAttribute('font-size', '9');
+            txt.setAttribute('font-family', 'JetBrains Mono');
+            txt.setAttribute('text-anchor', 'middle');
+            txt.textContent = p.month;
+            labelsGroup.appendChild(txt);
+          }
+        });
+
+        ptsMain.forEach((p, i) => {
+          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          circle.setAttribute('cx', p.x);
+          circle.setAttribute('cy', p.y);
+          circle.setAttribute('r', '5.5');
+          circle.setAttribute('fill', '#000000');
+          circle.setAttribute('stroke', accentColor);
+          circle.setAttribute('stroke-width', '2.5');
+          circle.style.cursor = 'pointer';
+
+          circle.addEventListener('mouseenter', () => {
+            circle.setAttribute('r', '8');
+            tooltip.innerHTML = `
+              <div class="font-semibold text-white mb-1">${p.month} Trajectory</div>
+              <div class="flex justify-between gap-4 font-mono text-[11px]">
+                <span class="text-zinc-400">Optimized:</span>
+                <span class="text-cyanTelemetry font-semibold">${p.val}</span>
+              </div>
+              <div class="flex justify-between gap-4 font-mono text-[11px]">
+                <span class="text-zinc-400">Baseline:</span>
+                <span class="text-zinc-300">${ptsBase[i].val}</span>
+              </div>
+            `;
+            tooltip.style.left = `${(p.x / W) * 100}%`;
+            tooltip.style.top = `${p.y}px`;
+            tooltip.classList.remove('opacity-0');
+          });
+
+          circle.addEventListener('mouseleave', () => {
+            circle.setAttribute('r', '5.5');
+            tooltip.classList.add('opacity-0');
+          });
+
+          nodesGroup.appendChild(circle);
+        });
+      }
+
+      renderStudio();
+
+      window.recalculateROI = function() {
+        const rev = parseInt(document.getElementById('slider-rev').value, 10);
+        const team = parseInt(document.getElementById('slider-team').value, 10);
+        const liftPct = parseInt(document.getElementById('slider-lift').value, 10);
+
+        document.getElementById('val-rev').textContent = `$${rev.toLocaleString()}`;
+        document.getElementById('val-team').textContent = `${team} Staff`;
+        document.getElementById('val-lift').textContent = `${liftPct}%`;
+
+        const incrementalRev = rev * (liftPct / 100);
+        const hoursReclaimed = team * 12 * 48;
+        const opExSavings = hoursReclaimed * 65;
+        const totalValue = incrementalRev + opExSavings;
+
+        const fmtCur = (n) => `+$${Math.round(n).toLocaleString()}`;
+
+        document.getElementById('out-rev-impact').textContent = fmtCur(incrementalRev);
+        document.getElementById('out-hours').textContent = `${hoursReclaimed.toLocaleString()} hrs`;
+        document.getElementById('out-savings').textContent = fmtCur(opExSavings);
+        document.getElementById('roi-total-pill').textContent = `Total Annual Value: ${fmtCur(totalValue)}`;
+
+        const revShare = Math.round((incrementalRev / totalValue) * 100);
+        const savingsShare = 100 - revShare;
+
+        document.getElementById('bar-fill-left').style.width = `${revShare}%`;
+        document.getElementById('bar-fill-right').style.width = `${savingsShare}%`;
+        document.getElementById('bar-lbl-left').textContent = `Revenue / Margin Lift (${revShare}%)`;
+        document.getElementById('bar-lbl-right').textContent = `Operational Savings (${savingsShare}%)`;
+
+        document.getElementById('roi-narrative').innerHTML = `
+          Automating manual SQL &amp; Power BI workflows reclaims <strong>${hoursReclaimed.toLocaleString()} hours annually</strong> (<strong>${fmtCur(opExSavings)}</strong> in direct operational savings) while decision-led optimization generates <strong>${fmtCur(incrementalRev)}</strong> in incremental value—totaling <strong>${fmtCur(totalValue)}</strong> per year.
+        `;
+      };
+
+      recalculateROI();
+
+      window.toggleCase = function(item) {
+        const isOpen = item.classList.contains('is-open');
+        document.querySelectorAll('.case-item').forEach(c => c.classList.remove('is-open'));
+        if (!isOpen) item.classList.add('is-open');
+      };
+
+      window.handleCookieAction = function(action) {
+        const banner = document.getElementById('cookie-banner');
+        banner.style.transform = 'translateY(100%)';
+        setTimeout(() => banner.remove(), 500);
+      };
+
+      window.submitBrief = function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submit-btn');
+        btn.textContent = '✓ Consultation Brief Dispatched Successfully';
+        btn.className = 'w-full py-4 rounded-xl bg-emeraldTelemetry text-black font-semibold uppercase tracking-wider transition-all duration-300 shadow-lg';
+        setTimeout(() => {
+          btn.textContent = 'Dispatch Consultation Request';
+          btn.className = 'w-full py-4 rounded-xl bg-white text-black font-semibold uppercase tracking-wider transition-all duration-300 shadow-lg';
+          e.target.reset();
+        }, 4500);
+      };
+    });
+  </script>
+</body>
+</html>
